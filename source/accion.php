@@ -1204,7 +1204,7 @@ case 'mercado':
 
 		if ($pols <= $pol['pols']) {
 			sql("INSERT INTO pujas (pais, mercado_ID, user_ID, pols, time) VALUES ('".PAIS."', '".$ID."', '".$pol['user_ID']."', '".$pols."', '".$date."')");
-			evento_chat('<b>[#]</b><em>'.$pol['nick'].'</em> Ha realizado una puja en la subasta (<a href="/subasta/">Subasta</a>)'); 
+			evento_chat('<b>[#]</b> <em>'.$pol['nick'].'</em> Ha realizado una puja en la subasta (<a href="/subasta/">Subasta</a>)'); 
 		}
 		evento_log('Puja ('.$pols.' monedas)');
 		$refer_url = 'subasta';
