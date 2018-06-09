@@ -1201,15 +1201,10 @@ case 'mercado':
 	if (($_GET['b'] == 'puja') AND ($pol['estado'] != 'extranjero') AND ($_GET['ID']) AND ($_POST['puja'] > 0) AND (is_numeric($_POST['puja'])) AND (date('H:i') != '20:00')) {
 		$ID = $_GET['ID'];
 		$pols = $_POST['puja'];
-		$pols_max = true;
-		$result = sql("SELECT pols FROM pujas 
-WHERE pais = '".PAIS."' AND mercado_ID = '".$ID."' 
-ORDER BY pols DESC LIMIT 1");
-		while($r = r($result)){ if ($r['pols'] >= $pols) { $pols_max = false; } }
 
-		if (($pols_max) AND ($pols <= $pol['pols'])) {
+		if ($pols <= $pol['pols']) {
 			sql("INSERT INTO pujas (pais, mercado_ID, user_ID, pols, time) VALUES ('".PAIS."', '".$ID."', '".$pol['user_ID']."', '".$pols."', '".$date."')");
-			evento_chat('<b>[#]</b> puja '.pols($pols).' '.MONEDA.' de <em>'.$pol['nick'].'</em> (<a href="/subasta/">Subasta</a>)'); 
+			evento_chat('<b>[#]</b><em>'.$pol['nick'].'</em> Ha realizado una puja en la subasta (<a href="/subasta/">Subasta</a>)'); 
 		}
 		evento_log('Puja ('.$pols.' monedas)');
 		$refer_url = 'subasta';
