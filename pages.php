@@ -69,7 +69,7 @@ case 'presentacion':
 
 
 case 'desarrollo':
-	$txt_title = 'Desarrollo de VirtualPol | Codigo fuente, Software libre, descargar'; 
+	$txt_title = 'Desarrollo de VirtualPol2 | Codigo fuente, Software libre, descargar'; 
 	$txt_nav = array('Desarrollo');
 
 	$result = mysql_query("SELECT title, text FROM docs WHERE ID = 10 LIMIT 1", $link); // doc_ID 10 = Desarrollo
