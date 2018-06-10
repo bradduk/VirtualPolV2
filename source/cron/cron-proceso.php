@@ -362,7 +362,6 @@ LIMIT 80");
 while($r = r($result)) {
 	//if ($r['estado'] == 'ciudadano') { $st['eliminados']++; }
 	//eliminar_ciudadano($r['ID']);
-	convertir_turista($r['ID']);
 }
 
 // Emails de aviso de expiración
@@ -386,6 +385,10 @@ while($r = r($result)) {
 <p><b>VirtualPol</b> - La primera Red Social Democrática.<br />
 http://www.'.DOMAIN.'</p>';
 	//enviar_email(null, 'Tu usuario '.$r['nick'].' está a punto de expirar por inactividad', $mensaje, $r['email']);
+	if ($r['estado'] == 'ciudadano') { 
+		$st['eliminados']++; 
+		convertir_turista($r['ID']);
+	}
 }
 
 
