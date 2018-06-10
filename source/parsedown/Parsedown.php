@@ -1436,9 +1436,11 @@ class Parsedown
 
     protected function unmarkedText($text)
     {
+        error_log("unmarkedText: ".$text." (".$this->breaksEnabled.")");
         if ($this->breaksEnabled)
         {
             $text = preg_replace('/[ ]*\n/', "<br />\n", $text);
+            error_log("Text replaced: ".$text);
         }
         else
         {
