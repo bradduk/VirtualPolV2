@@ -1691,14 +1691,24 @@ case 'foro':
 		$text = gen_text($_POST['text'], 'plain');
 
 		if ($_POST['hilo']) { //msg
+			$result = sql("SELECT f.url foro, h.url hilo, m.ID mensaje FROM ".SQL."foros f, ".SQL."foros_hilos h, ".SQL."foros_msg m where f.ID = h.sub_ID and m.hilo_ID = h.ID and m.ID='".$_POST['hilo']."'");
+			$r =r($result);
+
 			sql("UPDATE ".SQL."foros_msg SET text = '".$text."' WHERE ID = '".$_POST['hilo']."' AND estado = 'ok' AND user_ID = '".$pol['user_ID']."' AND time > '".date('Y-m-d H:i:s', time() - 3600)."' LIMIT 1");
+			evento_log('Foro mensaje editado <a href="/foro/'.$r['foro'].'/'.$r['hilo'].'#m-'.$r['mensaje'].'">#'.$_POST['hilo'].'</a>');
 		} else { //hilo
 			if (strlen($_POST['title']) >= 4) {
+				$result = sql("SELECT f.url foro, h.url hilo FROM ".SQL."foros f, ".SQL."foros_hilos h where f.ID = h.sub_ID and  h.ID='".$_POST['subforo']."'");
+				$r =r($result);
+	
 				$title = strip_tags($_POST['title']);
 				sql("UPDATE ".SQL."foros_hilos SET text = '".$text."', title = '".$title."'".($_POST['sub_ID'] > 0?", sub_ID = '".$_POST['sub_ID']."'":'')." WHERE ID = '".$_POST['subforo']."' AND estado = 'ok' AND (user_ID = '".$pol['user_ID']."' OR 'true' = '".(nucleo_acceso($vp['acceso']['foro_borrar'])?'true':'false')."') LIMIT 1");
+				evento_log('Foro hilo editado <a href="/foro/'.$r['foro'].'/'.$r['hilo'].'">#'.$_POST['hilo'].'</a>');
 			}
 		}
-		evento_log('Foro '.($_POST['hilo']?'mensaje':'hilo').' editado #'.$_POST['hilo']);
+
+
+		
 		$refer_url = '/foro/r/'.$_POST['subforo'];
 	}
 	break;
