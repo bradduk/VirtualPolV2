@@ -39,7 +39,7 @@ class Parsedown
         $markup = $this->lines($lines);
 
         # trim line breaks
-        $markup = trim($markup, "\n");
+        #$markup = trim($markup, "\n");
 
         return $markup;
     }
