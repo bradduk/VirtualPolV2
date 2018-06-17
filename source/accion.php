@@ -2015,6 +2015,7 @@ FROM cargos WHERE pais = '".PAIS."' AND cargo_ID = '".$_GET['cargo_ID']."' AND a
 				sql("DELETE FROM examenes WHERE pais = '".PAIS."' AND cargo_ID = '".$_GET['cargo_ID']."' LIMIT 1");
 			}
 		}
+		evento_log('Cargo '.$_GET['cargo_ID'].' eliminado por '.$pol['user_ID']);
 		$refer_url = 'cargos/editar';
 
 
