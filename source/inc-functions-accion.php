@@ -373,35 +373,7 @@ function enviar_email($user_ID, $asunto, $mensaje, $email='') {
 }
 
 function pols_transferir($pols, $emisor_ID, $receptor_ID, $concepto, $pais=false) {
-	global $link, $pol;
-
-	if ($pais == false) { $pais = PAIS; }
-
-	$return = false;
-	$pols = strval($pols);
-	if ((is_numeric($pols)) AND ($pols != 0) AND ($concepto)) {
-		$concepto = ucfirst(strip_tags($concepto));
-
-		//quitar
-		if ($emisor_ID > 0) {
-			sql("UPDATE users SET pols = pols - ".$pols." WHERE ID = '".$emisor_ID."' AND pais = '".$pais."' LIMIT 1");
-		} else {
-			if (isset($pol['nick'])) { $concepto = '<b>'.$pol['nick'].'&rsaquo;</b> '.$concepto; }
-			sql("UPDATE cuentas SET pols = pols - ".$pols." WHERE ".($emisor_ID==-1?"gobierno = 'true'":"ID = '".substr($emisor_ID, 1)."'")." AND pais = '".$pais."' LIMIT 1");
-		}
-
-		//ingresar
-		if ($receptor_ID > 0) {
-			sql("UPDATE users SET pols = pols + ".$pols." WHERE ID = '".$receptor_ID."' AND pais = '".$pais."' LIMIT 1");
-		} else {
-			sql("UPDATE cuentas SET pols = pols + ".$pols." WHERE ".($receptor_ID==-1?"gobierno = 'true'":"ID = '".substr($receptor_ID, 1)."'")." AND pais = '".$pais."' LIMIT 1");
-		}
-
-		sql("INSERT INTO transacciones (pais, pols, emisor_ID, receptor_ID, concepto, time) VALUES ('".$pais."', ".$pols.", '".$emisor_ID."', '".$receptor_ID."', '".$concepto."', '".date('Y-m-d H:i:s')."')");
-		if ($receptor_ID > 0) { notificacion($receptor_ID, 'Te han transferido '.$pols.' monedas', '/pols'); }
-		$return = true;
-	}
-	return $return;
+	return true;
 }
 
 function eliminar_ciudadano($ID) {
