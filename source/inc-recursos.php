@@ -11,7 +11,7 @@ $txt_recursos .= '<div id="currencies"><ul>';
 $result = mysql_query("SELECT ur.quantity, r.name, r.icon from resources r, user_resources ur where ur.resource_id=r.id and ur.user_id=".$pol['user_ID']." and r.type='currency'");
 
 while($r = mysql_fetch_array($result)) {
-    $txt_recursos .= '<li><img src='.IMG.'/'.$r['r.icon'].' alt="'.$r['r.name'].'">'.$r['ur.quantity'].'</li>'; 
+    $txt_recursos .= '<li><img src='.IMG.'/'.$r['icon'].' alt="'.$r['name'].'">'.$r['quantity'].'</li>'; 
 }
 
 
