@@ -182,12 +182,8 @@ foreach(explode(';', $pol['config']['palabras']) as $t) {
 
 echo '</p>';
 
-if ((ECONOMIA) AND (substr($_SERVER['REQUEST_URI'], 0, 5) != '/mapa')) {
-	echo '<a href="/mapa" class="gris" style="float:right;">'._('mapa').'</a><a href="/subasta" class="gris">'._('Subasta').'</a>';
-	if (!isset($cuadrado_size)) { $cuadrado_size = 12; }
-	include('inc-mapa.php');
-	echo '<div style="margin:4px 0 0 6px;">'.$txt_mapa.'</div>';
-}
+include('inc-recursos.php');
+echo '<div style="margin:4px 0 0 6px;">'.$txt_recursos.'</div>';
 ?>
 
 	</div>
