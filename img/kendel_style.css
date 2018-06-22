@@ -32,11 +32,11 @@
     float: left;
 }
 
-.currencies ul {
+.currencies.ul {
     list-style-type: none;
 }
 
-.currencies img {
+.currencies.img {
     width: 32px;
     height: 32px;
 }

@@ -6,7 +6,7 @@
 ** The source: http://www.virtualpol.com/codigo - TOS: http://www.virtualpol.com/TOS
 ** VirtualPol, The first Democratic Social Network - http://www.virtualpol.com
 */
-$txt_recursos .= '<div id="currencies"><ul>';
+$txt_recursos .= '<div id="currencies" class="currencies"><ul>';
 
 $result = mysql_query("SELECT ur.quantity, r.name, r.icon from resources r, user_resources ur where ur.resource_id=r.id and ur.user_id=".$pol['user_ID']." and r.type='currency'");
 
