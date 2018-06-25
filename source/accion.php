@@ -1299,11 +1299,17 @@ case 'votacion':
 				break;
 
 			case 'cargo':
+				error_log("Creando votacion de cargo...");
+				error_log("SELECT nombre FROM cargos WHERE cargo_ID = '".$_POST['cargo']."' AND pais = '".PAIS."'  LIMIT 1");
+				error_log("SELECT ID, nick FROM users WHERE nick = '".$_POST['nick']."' AND pais = '".PAIS."' LIMIT 1");
+
 				$result = sql("SELECT nombre FROM cargos WHERE cargo_ID = '".$_POST['cargo']."' AND pais = '".PAIS."'  LIMIT 1");
 				while($r = r($result)){ $cargo_nombre = $r['nombre']; }
 
 				$result = sql("SELECT ID, nick FROM users WHERE nick = '".$_POST['nick']."' AND pais = '".PAIS."' LIMIT 1");
 				while($r = r($result)){ $cargo_user_ID = $r['ID']; $_POST['nick'] = $r['nick']; }
+
+				error_log("Nombre cargo: ".$cargo_nombre." cargo_user_id: ".$cargo_user_ID);
 
 				if (($cargo_nombre) AND ($cargo_user_ID)) { // fuerza configuracion
 					$_POST['tipo_voto'] = 'estandar';
@@ -1318,7 +1324,7 @@ case 'votacion':
 					$_POST['descripcion'] .= '<hr />&iquest;Estas a favor que <b>'.crear_link($_POST['nick']).'</b> tenga el cargo <b>'.$cargo_nombre.'</b>?<br /><br />Al finalizar esta votaci&oacute;n, si el resultado por mayor&iacute;a es a favor, se otorgar&aacute; el cargo autom&aacute;ticamente, si por el contrario el resultado es en contra se le destituir&aacute; del cargo.';
 					$respuestas = 'En Blanco|SI|NO|';
 					$_POST['votos_expire'] = 0;	
-				} else { exit; }
+				} else { $txt.='Error creando la votacion al cargo solicitada.';}
 				break;
 		}
 
