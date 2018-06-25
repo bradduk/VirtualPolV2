@@ -353,9 +353,8 @@ loadChartbeat : function() { oldonload(); loadChartbeat(); };
 	<link rel="stylesheet" href="https://unpkg.com/easymde/dist/easymde.min.css">
 	<script src="https://unpkg.com/easymde/dist/easymde.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.8.6/showdown.min.js"></script>
-	<?=$txt_footer?>
 </body>
-
+<?=$txt_footer?>
 
 </html>
 <?php if ($link) { mysql_close($link); } ?>

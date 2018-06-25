@@ -369,7 +369,7 @@ if (($_GET['a'] == 'verificacion') AND ($_GET['b']) AND (isset($pol['user_ID']))
 </div>
 <p>'.(nucleo_acceso($vp['acceso']['votacion_borrador'])?boton(_('Guardar borrador'), 'submit', false, 'large blue'):boton(_('Guardar borrador'), false, false, 'large red').' No tienes acceso. Solo pueden: '.verbalizar_acceso($vp['acceso']['votacion_borrador'])).'</p>';
 
-	$txt_footer .= '<script type="text/javascript">
+	$txt_header .= '<script type="text/javascript">
 campos_num = '.($respuestas_num+1).';
 campos_max = 100;
 
@@ -388,7 +388,7 @@ function cambiar_tipo_votacion(tipo) {
 			break;
 		default:
 			$(".votar_form input").val("");
-			$("input[name="respuesta0"]).val("En Blanco");
+			$("input[name=\'respuesta0\']").val("En Blanco");
 	}
 }
 
