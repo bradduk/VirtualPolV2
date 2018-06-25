@@ -1299,17 +1299,12 @@ case 'votacion':
 				break;
 
 			case 'cargo':
-				error_log("Creando votacion de cargo...");
-				error_log("SELECT nombre FROM cargos WHERE cargo_ID = '".$_POST['cargo']."' AND pais = '".PAIS."'  LIMIT 1");
-				error_log("SELECT ID, nick FROM users WHERE nick = '".$_POST['nick']."' AND pais = '".PAIS."' LIMIT 1");
 
 				$result = sql("SELECT nombre FROM cargos WHERE cargo_ID = '".$_POST['cargo']."' AND pais = '".PAIS."'  LIMIT 1");
 				while($r = r($result)){ $cargo_nombre = $r['nombre']; }
 
 				$result = sql("SELECT ID, nick FROM users WHERE nick = '".$_POST['nick']."' AND pais = '".PAIS."' LIMIT 1");
 				while($r = r($result)){ $cargo_user_ID = $r['ID']; $_POST['nick'] = $r['nick']; }
-
-				error_log("Nombre cargo: ".$cargo_nombre." cargo_user_id: ".$cargo_user_ID);
 
 				if (($cargo_nombre) AND ($cargo_user_ID)) { // fuerza configuracion
 					$_POST['tipo_voto'] = 'estandar';

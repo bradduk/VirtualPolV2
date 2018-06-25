@@ -416,7 +416,7 @@ WHERE estado = 'borrador' AND pais = '".PAIS."'
 ORDER BY time DESC
 LIMIT 5000");
 	while($r = r($result)) {
-
+		error_log("Comprobando acceso para '".$r['pregunta']."': ".$vp['acceso'][$r['tipo']]);
 		if (nucleo_acceso($vp['acceso'][$r['tipo']])) {
 			$boton_borrar = boton('X', accion_url().'a=votacion&b=eliminar&ID='.$r['ID'], '¿Estás seguro de querer ELIMINAR este borrador de votación?', 'small');
 			$boton_iniciar = boton(_('Iniciar'), accion_url().'a=votacion&b=iniciar&ref_ID='.$r['ID'], '¿Estás seguro de querer INICIAR esta votación?', 'small');

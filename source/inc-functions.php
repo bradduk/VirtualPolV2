@@ -25,6 +25,7 @@ function nucleo_acceso($tipo, $valor='', $pais=false) {
 	if ($pais == false) { $pais = PAIS; }
 	if (is_array($tipo)) { $valor = $tipo[1]; $tipo = $tipo[0]; }
 	elseif (stristr($tipo, '|')) { $valor = explodear('|', $tipo, 1); $tipo = explodear('|', $tipo, 0); }
+	error_log("tipo de acceso a verificar: ".$tipo);
 	switch ($tipo) {
 		case 'internet': case 'anonimos': $rt = true; break;
 		case 'ciudadanos_global': if ((isset($_SESSION['pol']['user_ID'])) AND ($_SESSION['pol']['estado'] == 'ciudadano')) { $rt = true; } break;
@@ -34,7 +35,13 @@ function nucleo_acceso($tipo, $valor='', $pais=false) {
 		case 'afiliado': if (($_SESSION['pol']['pais'] == $pais) AND ($_SESSION['pol']['partido_afiliado'] == $valor)) { $rt = true; } break;
 		case 'confianza': if (($_SESSION['pol']['confianza'] >= $valor)) { $rt = true; } break;
 		case 'nivel': if (($_SESSION['pol']['pais'] == $pais) AND ($_SESSION['pol']['nivel'] >= $valor)) { $rt = true; } break;
-		case 'cargo': if (($_SESSION['pol']['pais'] == $pais) AND (count(array_intersect(explode(' ', $_SESSION['pol']['cargos']), explode(' ', $valor))) > 0)) { $rt = true; } break;
+		case 'cargo': 
+			error_log("cargos: ".$_SESSION['pol']['cargos']);
+			error_log("valor: ".$valor);
+			if (($_SESSION['pol']['pais'] == $pais) AND (count(array_intersect(explode(' ', $_SESSION['pol']['cargos']), explode(' ', $valor))) > 0)) {
+				 $rt = true; 
+			} 
+			break;
 		case 'grupos': if (($_SESSION['pol']['pais'] == $pais) AND (count(array_intersect(explode(' ', $_SESSION['pol']['grupos']), explode(' ', $valor))) > 0)) { $rt = true; } break;
 		case 'examenes': if (($_SESSION['pol']['pais'] == $pais) AND (count(array_intersect(explode(' ', $_SESSION['pol']['examenes']), explode(' ', $valor))) > 0)) { $rt = true; } break;
 		case 'monedas': if ($_SESSION['pol']['pols'] >= $valor) { $rt = true; } break;
