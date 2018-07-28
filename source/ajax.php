@@ -219,10 +219,8 @@ LIMIT 1");
 
 			$elcargo = $_SESSION['pol']['cargo'];
 			if (($_SESSION['pol']['pais'] != PAIS) AND ($_SESSION['pol']['estado'] == 'ciudadano')) { $elcargo = 99; } // Extrangero
-			
-			error_log("cargos of ". $elnick .": ".  $_SESSION['pol']['cargos']);
 
-			if (array_key_exists(200, $_SESSION['pol']['cargos']) || array_key_exists(69, $_SESSION['pol']['cargos'])){
+			if (in_array(200, $_SESSION['pol']['cargos']) || in_array(69, $_SESSION['pol']['cargos'])){
 				$msg = ":corona: ". $msg ." :corona:";
 			}
 
