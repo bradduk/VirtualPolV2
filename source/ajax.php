@@ -118,6 +118,11 @@ LIMIT 1");
 		$msg = strip_tags($msg);
 		$msg = str_replace(":corona:", "", $msg);
 
+		$msg_len = strlen($_POST['msg']);
+		if ($msg_len <= 0){
+			return;
+		}
+
 		$target_ID = 0;
 		$tipo = 'c';
 
