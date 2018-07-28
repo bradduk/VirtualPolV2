@@ -116,6 +116,7 @@ LIMIT 1");
 
 		$msg = str_replace(array("\n", "\r", "ส็็็็็็็็", "ส็็็็็็็็็็็็็็็็็็็็็็็็็"), "", str_replace("'", "''", trim($msg)));
 		$msg = strip_tags($msg);
+		$msg = str_replace(":corona:", "", $msg);
 
 		$target_ID = 0;
 		$tipo = 'c';
@@ -213,6 +214,10 @@ LIMIT 1");
 
 			$elcargo = $_SESSION['pol']['cargo'];
 			if (($_SESSION['pol']['pais'] != PAIS) AND ($_SESSION['pol']['estado'] == 'ciudadano')) { $elcargo = 99; } // Extrangero
+
+			if ($elcargo == 200 || $elcargo == 69){
+				$msg = ":corona: ". $msg ." :corona:";
+			}
 
 			sql("INSERT DELAYED INTO chats_msg (chat_ID, nick, msg, cargo, user_ID, tipo, IP) VALUES ('".$chat_ID."', '".$elnick."', '".$msg."', '".$elcargo."', '".$target_ID."', '".$tipo."', ".$sql_ip.")");
 
