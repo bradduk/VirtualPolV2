@@ -220,16 +220,6 @@ LIMIT 1");
 			$elcargo = $_SESSION['pol']['cargo'];
 			if (($_SESSION['pol']['pais'] != PAIS) AND ($_SESSION['pol']['estado'] == 'ciudadano')) { $elcargo = 99; } // Extrangero
 			
-			$cargos_array = explode(" ", $_SESSION['pol']['cargos']);
-			error_log("Array cargos: ". $cargos_array);
-			error_log("Session cargos: ". $_SESSION['pol']['cargos']);
-			if (strpos($_SESSION['pol']['cargos'], '69')){
-				error_log("Puto rey");
-			}
-			if (in_array(69, $cargos_array)){
-				$msg = ":corona: ". $msg ." :corona:";
-			}
-
 			sql("INSERT DELAYED INTO chats_msg (chat_ID, nick, msg, cargo, user_ID, tipo, IP) VALUES ('".$chat_ID."', '".$elnick."', '".$msg."', '".$elcargo."', '".$target_ID."', '".$tipo."', ".$sql_ip.")");
 
 			sql("
